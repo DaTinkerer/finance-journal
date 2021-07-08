@@ -39,6 +39,8 @@ export default {
       }).then(() =>{
         this.$router.push({ name: 'List' })
 
+      }) .catch(err =>{
+        console.log(err)
       })
       
     },

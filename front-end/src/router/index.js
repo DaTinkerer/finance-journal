@@ -4,7 +4,7 @@ import List from '../views/List.vue'
 
 const routes = [
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
     component: Login
   },

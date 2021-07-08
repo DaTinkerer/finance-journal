@@ -1,19 +1,24 @@
 import axios from 'axios'
 import { createStore } from 'vuex'
 
+
 export default createStore({
   state: {
-    token: '',
+    token: localStorage.getItem('token'),
   },
   mutations: {
     getToken(state, token) {
+      localStorage.setItem('token', token)
       state.token = token
-      console.log(state.token)
+      
       
     }
   },
   actions: {
     loginUser({ commit }, data){
+      return new Promise ((resolve, reject) => {
+
+      
       axios({
         method: 'POST',
         url: 'http://localhost:8000/auth/login/',
@@ -24,7 +29,11 @@ export default createStore({
         }
       }).then(response =>{
         commit('getToken', response.data['key'])
+        resolve()
+      }).catch(err => {
+        reject(err)
       })
+    })
     }
   },
   modules: {

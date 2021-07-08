@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+
+import axiosInstance from '/src/main.js'
 export default {
     name:'List',
     data () {
@@ -18,19 +19,18 @@ export default {
         }
     },
 
-    async created() {
-        axios({
-        method: 'GET',
-        url: 'http://localhost:8000/journal/',
-        headers: {'Authorization': `Token ${this.$store.state.token}`},
+    created() {
+
+        axiosInstance.get(
+            'http://localhost:8000/journal/'
+        ) .then(response => {
+            this.entry = response.data
+        }) .catch(err => {
+            console.log(err)
+        })
+
         
-      }).then(response =>{
-
-          this.entry = response.data
-
-
-        
-      })
+   
     }
 }
 </script>
