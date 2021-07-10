@@ -1,8 +1,10 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
 import axios from 'axios'
-import { createStore } from 'vuex'
 
+Vue.use(Vuex)
 
-export default createStore({
+export default new Vuex.Store({
   state: {
     token: localStorage.getItem('token'),
   },

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
 import axiosInstance from '/src/main.js'
 export default {
     name:'List',
@@ -18,9 +17,7 @@ export default {
             entry: []
         }
     },
-
     created() {
-
         axiosInstance.get(
             'http://localhost:8000/journal/'
         ) .then(response => {
@@ -28,7 +25,6 @@ export default {
         }) .catch(err => {
             console.log(err)
         })
-
         
    
     }

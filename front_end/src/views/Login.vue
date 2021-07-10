@@ -13,46 +13,35 @@
 </template>
 
 <script>
-
 export default {
   name: 'Login',
   data () {
     return{
       email: null,
       password: null,
-
       token: '',
-
     }
     
   },
   props: {
     
   },
-
   methods: {
     submitForm () {
-
       this.$store.dispatch('loginUser',{
         email: this.email,
         password: this.password
       }).then(() =>{
         this.$router.push({ name: 'List' })
-
       }) .catch(err =>{
         console.log(err)
       })
       
     },
-
   }
-
-
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
-
