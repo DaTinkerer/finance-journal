@@ -32,9 +32,9 @@ class Entry(models.Model):
     )
 
 
-    timestamp = models.DateTimeField(auto_now_add=True)
+    date = models.DateField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-timestamp']
+        ordering = ['-date']
     def __str__(self):
         return self.category

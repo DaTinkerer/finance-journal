@@ -1,37 +1,20 @@
 <template>
     <div class="list">
-        <v-container>
-
-            <v-data-table
-              :headers="headers"
-              :items="entry"
-              
-            ></v-data-table>
-        </v-container>
-  
     </div>
+        
 </template>
 
 <script>
 // import axiosInstance from '../main.js'
 import axios from 'axios'
 import store from '../store'
+import moment from 'moment';
 export default {
     name:'List',
     data () {
         return {
           
-        headers: [
-          {
-            text: 'Date',
-            align: 'start',
-            filterable: false,
-            value: 'timestamp',
-          },
-          { text: 'Category', value: 'category' },
-          { text: 'Amount', value: 'cost' },
-         
-        ],
+        
   
        
         entry: []
@@ -51,11 +34,17 @@ export default {
           headers: {'Content-Type': 'application/json'}
         }) .then(response => {
           this.entry = response.data
+          
         }) .catch(err => {
           console.log(err)
         })
+
+        const m = moment(this.entry['date'])
+
+        console.log(m.format('MMM Do YYYY'))
+
         
-   
+        
     }
 }
 </script>
