@@ -8,7 +8,7 @@
 // import axiosInstance from '../main.js'
 import axios from 'axios'
 import store from '../store'
-import moment from 'moment';
+
 export default {
     name:'List',
     data () {
@@ -39,10 +39,7 @@ export default {
           console.log(err)
         })
 
-        const m = moment(this.entry['date'])
-
-        console.log(m.format('MMM Do YYYY'))
-
+       
         
         
     }

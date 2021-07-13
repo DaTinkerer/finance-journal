@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    
+    <p>fuck tou</p>
     
   </div>
 </template>
