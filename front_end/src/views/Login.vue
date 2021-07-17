@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <p>fuck tou</p>
+    <p>fuck you</p>
     
   </div>
 </template>
@@ -15,7 +15,6 @@ export default {
       show: false,
       password: null,
       
-
       token: '',
       wrong_cred: false,
     }
