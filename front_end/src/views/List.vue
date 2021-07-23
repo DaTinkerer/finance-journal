@@ -38,7 +38,7 @@
       </div>
       
       <transition name="fade" appear>
-        <div class="edit-modal-overlay" v-if="showEditModal"></div>
+        <div @click="showEditModal=false" class="edit-modal-overlay" v-if="showEditModal"></div>
       </transition>
 
       <transition>
@@ -81,13 +81,14 @@ export default {
 
     },
     methods: {
-      edit () {
+     async edit () {
+        
         axiosInstance.patch(
           `/journal/update/${this.entry.id}/`,
-          {data: {cost: JSON.stringify(this.entry.cost)}}
+          {cost: this.entry.cost}
           
           
-        ) .then(this.getEntries())
+        ) 
 
     },
 
