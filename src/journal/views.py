@@ -12,11 +12,14 @@ class JournalEntryViewset(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
       
     serializer_class = EntrySerializer
-
+    
     def get_queryset(self):
         user = self.request.user
         
         return Entry.objects.filter(user=user)
+    def perform_create(self, serializer):
+        return serializer.save(user=self.request.user)
+    
 
 
         

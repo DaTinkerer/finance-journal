@@ -7,14 +7,14 @@
           <p class="account-btn">Account</p>
         
       </div>
-
-      <div class="add-expense-btn-container">
+       <!-- Every time I click this I want to show the form with category set to the default category defined in django models -->
+      <div @click="$data.entry = {cost: '', category:'Uncategorized'}; showCreateModal=true" class="add-expense-btn-container">
         <p>Add Expense</p>
       </div>
 
       <div class="data-section">
 
-        
+        <!-- table section that displays entries -->
         <table class="table">
           <thead>
             <tr>
@@ -34,24 +34,73 @@
 
           
         </table>
+        
 
       </div>
       
+      <!-- overlay that goes underneath edit and create form modals -->
       <transition name="fade" appear>
-        <div @click="showEditModal=false" class="edit-modal-overlay" v-if="showEditModal"></div>
+        <!-- Every time I exit the create modal I want to clear the form and set category to the default category defined in django models -->
+        <div class="modal-overlay" @click="$data.entry = {cost: '', category:'Uncategorized'}; showEditModal=false; showCreateModal=false" 
+         v-if="showEditModal || showCreateModal"></div>
       </transition>
-
+      
+      <!-- edit modal with form to edit an entry -->
       <transition>
         <div class="edit-modal" v-if="showEditModal">
         <div class="exit-btn" @click="showEditModal=false">&#10799;</div>
-          <form @submit.prevent="edit(); showEditModal=false" class="edit-form">
+        <label for="category">Change Category:</label>
+
+            <select form="edit-form" name="category" id="category" v-model="entry.category">
+              <option value="Groceries">Groceries</option>
+              <option value="Uncategorized">Uncategorized</option>
+              
+            </select>
+          <form @submit.prevent="edit(); showEditModal=false" class="edit-form" id="edit-form">
             <label for="cost">Change Amount:</label>
-            <input name="cost" type="number" v-model="entry.cost">
+            <input name="cost" type="number" step="0.01" min="0" v-model="entry.cost">
+
           </form>
+          
+          <div class="bottom-modal-container">
+            <p class="modal-bot-btns" id="delete"  @click="del(); showEditModal=false">Delete</p>
+            <p class="modal-bot-btns" id="update"  @click="edit(); showEditModal=false">Update</p>
+          </div>
+
+            
 
 
         </div>
       </transition>
+
+        <!-- A form to create a new entry -->
+        <transition>
+        <div class="create-modal" v-if="showCreateModal">
+        <div class="exit-btn" @click="$data.entry = {cost: '', category:'Uncategorized'}; showCreateModal=false">&#10799;</div>
+        <label for="category">Add Category:</label>
+
+            <select form="create-form" name="category" id="category" v-model="entry.category">
+              <option value="Groceries">Groceries</option>
+              <option value="Uncategorized">Uncategorized</option>
+              
+            </select>
+          <form @submit.prevent="createEntry(); showCreateModal=false" class="create-form" id="create-form">
+            <label for="cost">Add Amount:</label>
+            <input name="cost" type="number" step="0.01" min="0" v-model="entry.cost">
+
+          </form>
+          
+          <div class="bottom-modal-container">
+            
+            <p class="modal-bot-btns" id="create"  @click="createEntry(); showCreateModal=false">Create</p>
+          </div>
+
+            
+
+
+        </div>
+      </transition>
+
 
   </div>
         
@@ -59,14 +108,18 @@
 
 <script>
 import axiosInstance from '../main.js'
+// import axios from 'axios'
 export default {
     name:'List',
     data () {
         return {
           entries: [],
           entry: {},
+
+          
          
-          showEditModal: false
+          showEditModal: false,
+          showCreateModal: false
         
   
        
@@ -80,44 +133,80 @@ export default {
       
 
     },
-    methods: {
-     async edit () {
-        
-        axiosInstance.patch(
-          `/journal/update/${this.entry.id}/`,
-          {cost: this.entry.cost}
-          
-          
-        ) 
+  methods: {
+    async createEntry () {
+      const data = new FormData()
+
+      data.append('cost', this.entry.cost)
+      data.append('category', this.entry.category)
+      
+
+      axiosInstance.post('/journal/create/', data)
+      .then(() => {
+        this.getEntries()
+      }).catch(err => {
+        console.log(err)
+      })
 
     },
 
-    async getEntries () {
+      
+    async edit () {
+       
+      const data = new FormData()
+
+      data.append('cost', this.entry.cost)
+      data.append('category', this.entry.category)
+
+       
         
-        axiosInstance.get(
-         '/journal/',
-        
-        ) .then(response => {
-          // changes response.data array objects into a new array with human readable dates.
-          this.entries = response.data.map(x => ({
-            user: x.user,  
-            cost: x.cost, 
-            category: x.category, 
-            date:
-            new Date(x.date).toLocaleString(
-              'en-US',
-            {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-            }
-          ),
-          id: x.id}))
-        
-        }) .catch(err => {
+        axiosInstance.patch(
+          `/journal/update/${this.entry.id}/`,
+          data
+        ).then(() => {
+          this.getEntries()
+        }).catch(err => {
           console.log(err)
         })
-    } 
+        
+
+    },
+
+    async del () {
+        axiosInstance.post(`/journal/delete/${this.entry.id}/`)
+        .then(() => {
+          this.getEntries()
+        }).catch(err => {
+          console.log(err)
+        })
+    },
+
+    async getEntries () {
+          
+          axiosInstance.get(
+          '/journal/',
+          
+          ) .then(response => {
+            // changes response.data array objects into a new array with human readable dates.
+            this.entries = response.data.map(x => ({
+              user: x.user,  
+              cost: x.cost, 
+              category: x.category, 
+              date:
+              new Date(x.date).toLocaleString(
+                'en-US',
+              {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+              }
+            ),
+            id: x.id}))
+          
+          }) .catch(err => {
+            console.log(err)
+          })
+      } 
         
       
     }
@@ -127,6 +216,7 @@ export default {
 <style lang="scss">
 $nav-background: #F3FEF4;
 $btn-color: #AFE7A1;
+$primary-hover: #5F8D53;
   body {
     margin: 0;
     height: 100vh;
@@ -147,7 +237,7 @@ $btn-color: #AFE7A1;
       border-radius: .4em;
       background: $btn-color;
       &:hover {
-        background: #5F8D53;
+        background: $primary-hover;
         color: white;
         transition-duration: .2s;
         cursor: pointer;
@@ -171,7 +261,7 @@ $btn-color: #AFE7A1;
      border-radius: .4em;
       background: $btn-color;
       &:hover {
-        background: #5F8D53;
+        background: $primary-hover;
         color: white;
         transition-duration: .2s;
         
@@ -227,7 +317,7 @@ $btn-color: #AFE7A1;
     
     }
 
-    .edit-modal-overlay {
+    .modal-overlay {
 
         position: absolute;
         top: 0;
@@ -239,7 +329,7 @@ $btn-color: #AFE7A1;
 
       }
 
-      .edit-modal {
+      .edit-modal, .create-modal {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -248,9 +338,11 @@ $btn-color: #AFE7A1;
         width: 100%;
         max-width: 400px;
         background: #fff;
-        padding: 4rem;
-        padding-top: 1rem;
-        border-radius: .5rem;
+        padding: 4rem 4rem;
+        padding-top: 1em;
+        padding-bottom: 1rem;
+        ;
+        border-radius: .5em;
         
         
         label {
@@ -266,13 +358,68 @@ $btn-color: #AFE7A1;
         }
 
         .exit-btn {
-          padding-bottom: 1.5rem;
-          margin-left: 27rem;
+          padding-bottom: 1.5em;
+          margin-left: 27em;
           &:hover {
             cursor: pointer;
           
           }
         }
+
+        select {
+          margin-bottom: 2em;
+          padding: 1em;
+          padding-right: 3.3em;
+          border-radius: .4em;
+          border-color: #D3D3D3;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        .bottom-modal-container {
+          display: flex;
+          margin-top: 2em;
+          margin-left: 16em;
+
+          
+        }
+
+        .modal-bot-btns {
+          padding: .8em;
+          
+        }
+        
+
+        #delete {
+          margin-right: 2em;
+          background: #e60000;
+          color: #fff;
+          border-radius: .4em;
+          
+           &:hover {
+            background: #b30000;
+            cursor: pointer;
+            transition-duration: .2s;
+          }
+        }
+        #update, #create {
+          background: $btn-color;
+          border-radius: .4em;
+          &:hover {
+            color: #fff;
+            background: $primary-hover;
+            cursor: pointer;
+            transition-duration: .2s;
+          }
+
+        }
+
+        #create {
+          margin-left: 6.8em;
+        }
+
+        
       }
 
 </style>
