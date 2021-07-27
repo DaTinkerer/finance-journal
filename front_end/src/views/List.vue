@@ -87,7 +87,7 @@
           <form @submit.prevent="createEntry(); showCreateModal=false" class="create-form" id="create-form">
             <label for="cost">Add Amount:</label>
             <input name="cost" type="number" step="0.01" min="0" v-model="entry.cost">
-
+            
           </form>
           
           <div class="bottom-modal-container">
@@ -115,16 +115,10 @@ export default {
         return {
           entries: [],
           entry: {},
-
-          
          
           showEditModal: false,
-          showCreateModal: false
-        
-  
-       
-        
-        
+          showCreateModal: false  
+
         }
     },
   async created() {
@@ -214,16 +208,23 @@ export default {
 </script>
 
 <style lang="scss">
+
+
 $nav-background: #F3FEF4;
 $btn-color: #AFE7A1;
 $primary-hover: #5F8D53;
-  body {
+  // top navbar style 
+  .list {
     margin: 0;
     height: 100vh;
-    font-family: 'Inter';
+    font-family: 'Open Sans', sans-serif;
+    background: #fff;
+    
+    
     
   }
-  // top navbar style 
+
+
   .navbar-container {
     background: $nav-background;
     display: flex;
@@ -352,7 +353,7 @@ $primary-hover: #5F8D53;
           
           padding: .8rem;
           border-radius: .4em;
-          border-color: #D3D3D3;
+          border: #D3D3D3 .2em solid;
 
           
         }
@@ -371,7 +372,7 @@ $primary-hover: #5F8D53;
           padding: 1em;
           padding-right: 3.3em;
           border-radius: .4em;
-          border-color: #D3D3D3;
+          border: #D3D3D3 .1em solid;
           &:hover {
             cursor: pointer;
           }

@@ -3,6 +3,15 @@
   <router-view/>
 </template>
 
-<style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@100;400&family=Inter:wght@100;200;400&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+    
+    
+    
+    
+  }
 </style>
