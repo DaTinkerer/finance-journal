@@ -1,10 +1,18 @@
 <template>
     <div class="list">
-
+      <div class="container">
       <div class="navbar-container">
         <h2 class="title">Expenses</h2>
-        
+        <div class="dropdown-div">
           <p class="account-btn">Account</p>
+          <div class="burger-menu"><img src="../assets/burger.svg" alt=""></div>
+          <div class="dropdown-content">
+            <p @click="goToChangePass">Change Password</p>
+            <p @click="logout">Log out</p>
+            
+          </div>
+
+          </div>
         
       </div>
        <!-- Every time I click this I want to show the form with category set to the default category defined in django models -->
@@ -34,6 +42,8 @@
 
           
         </table>
+
+        <p v-if="entries == ''">No expenses yet</p>
         
 
       </div>
@@ -47,6 +57,7 @@
       
       <!-- edit modal with form to edit an entry -->
       <transition>
+        
         <div class="edit-modal" v-if="showEditModal">
         <div class="exit-btn" @click="showEditModal=false">&#10799;</div>
         <label for="category">Change Category:</label>
@@ -54,6 +65,22 @@
             <select form="edit-form" name="category" id="category" v-model="entry.category">
               <option value="Groceries">Groceries</option>
               <option value="Uncategorized">Uncategorized</option>
+              <option value="Dinning &#38; Drinks">Dinning &#38; Drinks</option>
+              <option value="Charity">Charity</option>
+              <option value="Education">Education</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Fees &#38; Charges">Fees &#38; Charges</option>
+              <option value="Financial">Financial</option>
+              <option value="Fitness">Fitness</option>
+              <option value="Gifts">Gifts</option>
+              <option value="Health">Health</option>
+              <option value="Loans">Loans</option>
+              <option value="Pets">Pets</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Taxes">Taxes</option>
+              <option value="Travel">Travel</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Auto &#38; Transport">Auto &#38; Transport</option>
               
             </select>
           <form @submit.prevent="edit(); showEditModal=false" class="edit-form" id="edit-form">
@@ -71,6 +98,7 @@
 
 
         </div>
+        
       </transition>
 
         <!-- A form to create a new entry -->
@@ -81,6 +109,22 @@
 
             <select form="create-form" name="category" id="category" v-model="entry.category">
               <option value="Groceries">Groceries</option>
+              <option value="Dinning &#38; Drinks">Dinning &#38; Drinks</option>
+              <option value="Charity">Charity</option>
+              <option value="Education">Education</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Fees &#38; Charges">Fees &#38; Charges</option>
+              <option value="Financial">Financial</option>
+              <option value="Fitness">Fitness</option>
+              <option value="Gifts">Gifts</option>
+              <option value="Health">Health</option>
+              <option value="Loans">Loans</option>
+              <option value="Pets">Pets</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Taxes">Taxes</option>
+              <option value="Travel">Travel</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Auto &#38; Transport">Auto &#38; Transport</option>
               <option value="Uncategorized">Uncategorized</option>
               
             </select>
@@ -101,14 +145,14 @@
         </div>
       </transition>
 
-
+</div>
   </div>
         
 </template>
 
 <script>
 import axiosInstance from '../main.js'
-// import axios from 'axios'
+
 export default {
     name:'List',
     data () {
@@ -200,25 +244,42 @@ export default {
           }) .catch(err => {
             console.log(err)
           })
-      } 
+      },
+      
+      logout () {
+        this.$store.dispatch('logoutUser')
+        .then(() =>{
+        this.$router.push({ name: 'Login' })
+      }) .catch(err =>{
+        console.log(err)
+        
+      })
+      },
+
+      goToChangePass () {
+
+        this.$router.push({name: 'ChangePass'})
+
+      }
         
       
     }
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 
 
 $nav-background: #F3FEF4;
 $btn-color: #AFE7A1;
 $primary-hover: #5F8D53;
   // top navbar style 
-  .list {
-    margin: 0;
-    height: 100vh;
-    font-family: 'Open Sans', sans-serif;
+ 
+  
+  body {
+    
     background: #fff;
+    
     
     
     
@@ -230,11 +291,18 @@ $primary-hover: #5F8D53;
     display: flex;
     justify-content: space-between;
     padding: 1em;
+    .title {
+      display: block;
+      margin-left: 4em;
+      font-weight: 400;
+    }
     .account-btn {
-      margin-right: 6em;
+      display: block;
+      margin-top: -1em;
+      margin-bottom: -1em;
       font-weight: 200;
-      padding: .2em 2em .2em 2em;
-      margin-bottom: 1.5em;
+      padding: .5em 3em .5em 3em;
+      
       border-radius: .4em;
       background: $btn-color;
       &:hover {
@@ -244,11 +312,48 @@ $primary-hover: #5F8D53;
         cursor: pointer;
       }
     }
-    .title {
-      margin-left: 4em;
-      font-weight: 400;
+    .burger-menu {
+      display: none;
+    }
+    
+
+  }
+
+  
+   .dropdown-div {
+      position: relative;
+      display: inline-block;
+      margin-right: 6em;
+      margin-bottom: 1.5em;
+      margin-top: 2em;
+      
+      &:hover, &:active {
+        cursor: pointer;
+        .dropdown-content {
+          display: block;
+          margin-top: 1em;
+          
+        }
+      }
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  p {
+    padding: 1em 1em;
+    display: block;
+    &:hover {
+      background-color: #ddd;
+      cursor: pointer;
     }
   }
+
+}
   .add-expense-btn-container {
     font-weight: 200;
     padding: .2em 2em .2em 2em;
@@ -332,7 +437,7 @@ $primary-hover: #5F8D53;
 
       .edit-modal, .create-modal {
         position: fixed;
-        top: 50%;
+        
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 99;
@@ -342,7 +447,7 @@ $primary-hover: #5F8D53;
         padding: 4rem 4rem;
         padding-top: 1em;
         padding-bottom: 1rem;
-        ;
+        
         border-radius: .5em;
         
         
@@ -420,8 +525,76 @@ $primary-hover: #5F8D53;
           margin-left: 6.8em;
         }
 
+   
+
         
       }
+
+
+  @media (max-width: 768px) {
+   
+    .navbar-container .account-btn {
+      display: none;
+    }
+
+    .navbar-container .burger-menu {
+      display: block;
+    }
+
+    .dropdown-div {
+      margin-left: 7em;
+     &:hover, &:focus {
+        .dropdown-content {
+        margin-top: -.5em;
+        margin-left: -8em;
+      }
+     }
+    
+      margin-right: 0em;
+      margin-left: auto;
+    }
+     .navbar-container .title {
+      margin-left: 0em;
+    }
+
+    .add-expense-btn-container {
+      margin-left: 1em;
+    }
+
+    .data-section {
+      margin-left: 0em;
+      margin-right: 0em;
+    }
+  }
+   @media (max-width: 545px){
+   
+   
+    .edit-modal, .create-modal {
+      transform: translate(0, 0);
+      height: 100%;
+      width: 100%;
+     position: absolute;
+     padding-left: .3em;
+     padding-right: .3em;
+    
+      
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      
+      .exit-btn {
+        margin-left: 24em;
+      }
+      
+      .bottom-modal-container {
+        margin-left: 13em;
+      }
+     
+    }
+  }
+  
 
 </style>
 

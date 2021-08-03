@@ -7,9 +7,10 @@ export default createStore({
   mutations: {
     getToken(state, token) {
       localStorage.setItem('token', token)
-      state.token = token
-      
-      
+      state.token = token 
+    },
+    deleteToken(state) {
+      state.token = null
     }
   },
   actions: {
@@ -32,8 +33,30 @@ export default createStore({
         reject(err)
       })
     })
-    }
+    },
+
+      logoutUser ({ commit }) {
+        return new Promise((resolve) =>{
+          axios({
+            method: 'POST',
+            url: 'http://localhost:8000/auth/logout/',
+            headers: {'Content-Type': 'application/json'},
+          }).then(() => {
+            localStorage.removeItem('token')
+            commit('deleteToken')
+            resolve()
+          }).catch(err => {
+            localStorage.removeItem('token')
+            resolve(err)
+          })
+
+      })
+
+
+      },
   },
+
+  
   modules: {
   }
 

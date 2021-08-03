@@ -5,6 +5,7 @@
       
       <div class="form">
         <h1 class="title">Log In</h1>
+        <strong v-if="wrong_cred" class="error">Email or password is invalid</strong>
         <form @submit.prevent="submitForm" class="login-form">
 
           <div class="email-div">
@@ -27,14 +28,14 @@
           </div>
 
         </form>
-          <div class="links">
-          <p class="form-links">Register</p>
-          <p class="form-links">Forgot Password?</p>
+          <div class="links-div">
+          <router-link to="register"><p class="form-links">Register</p></router-link>
+          <router-link to="forgot-password"><p class="form-links">Forgot Password?</p></router-link>
           </div>
 
       </div>
     </div>
-    {{passoword}}
+    
     
     
   </div>
@@ -76,14 +77,10 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 
 
-body{
-    
-    background: #AFE7A1;
-    
-  }
+
 
   .login-section {
     display: flex;
@@ -95,9 +92,9 @@ body{
     box-shadow: 1px 3px 3px #888888;
     
     
-    background: #fff;
+    background: #f5f4f2;;
     
-    width: 50%;
+    width: 100%;
     margin: auto;
     margin-top: 6em;
 
@@ -111,12 +108,12 @@ body{
       font-weight: 400;
     }
     .email-div{
-      margin-top: 3.5em;
+      margin-top: 1em;
       font-weight: 400;
     }
 
     .password-div{
-      margin-top: 3.5em;
+      margin-top: 2em;
       font-weight: 400;
     }
 
@@ -150,20 +147,47 @@ body{
         margin-left: 2.5em;
       }
     }
-    .links {
+    .links-div {
       margin-top: 2em;
+      margin-right: 21em;
+  
     }
     .form-links {
       margin-top: 1em;
       color: #137911;
+      
+      }
+
+      
+    }
+    .links p {
        &:hover {
        
         cursor: pointer;
       }
     }
+
+    a {
+      text-decoration: none;
     }
 
+    strong {
+      color: rgb(224, 9, 9);
+      display: block;
+      margin-top: 3em;
+    }
+  }
+  @media (max-width: 620px) {
+
+    .login-section {
+      width: 100%;
+      
+    }
+    .login-section .form .form-inputs{
+      width: 50%;
+    }
 
   }
+  
 
 </style>
