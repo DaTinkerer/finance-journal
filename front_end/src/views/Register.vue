@@ -8,6 +8,7 @@
         
         <form @submit.prevent="signUpForm" class="login-form">
           <strong v-if="wrong_cred" class="error">Invalid Fields</strong>
+          <p class="success" v-if="success">{{ success_msg.detail }}</p>
           <div class="email-div">
             
           <label for="email" class="form-label">Email:</label>
@@ -63,6 +64,9 @@ export default {
       password1: null,
       password2: null,
       wrong_cred: false,
+
+      success: false,
+      success_msg:'',
       
     }
     
@@ -74,16 +78,24 @@ export default {
     signUpForm () {
       axios({
         method: 'POST',
-        url: 'http://localhost:8000/register/',
+        url: 'http://198.211.106.130/register/',
         headers: {'Content-Type': 'application/json'},
         data: {
           'email': this.email,
           'password1': this.password1,
           'password2': this.password2
         }
-      }).then(() => {
+      }).then((response) => {
+          this.success_msg = response.data
+          this.wrong_cred = false
+          this.success = true
+        })
+
+        .then(() => new Promise(resolve => setTimeout(resolve, 1000)))
+        .then(() => {
         this.$router.push({name: 'Login'})
-      }).catch(err =>{
+        })
+      .catch(err =>{
         
         console.log(err)
        
@@ -202,6 +214,10 @@ export default {
       display: block;
       margin-top: 1em;
       
+    }
+
+    .success {
+        color: #5F8D53;
     }
 
 

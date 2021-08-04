@@ -8,7 +8,7 @@ import axios from 'axios'
 createApp(App).use(store).use(router).mount('#app')
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'http://198.211.106.130',
     headers: {'Content-Type': 'application/json'}
   })
   axiosInstance.interceptors.request.use((config) => {

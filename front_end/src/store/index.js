@@ -20,7 +20,7 @@ export default createStore({
       
       axios({
         method: 'POST',
-        url: 'http://localhost:8000/auth/login/',
+        url: 'http://198.211.106.130/auth/login/',
         headers: {'Content-Type': 'application/json'},
         data: {
           'email': data.email,
@@ -39,7 +39,7 @@ export default createStore({
         return new Promise((resolve) =>{
           axios({
             method: 'POST',
-            url: 'http://localhost:8000/auth/logout/',
+            url: 'http://198.211.106.130/auth/logout/',
             headers: {'Content-Type': 'application/json'},
           }).then(() => {
             localStorage.removeItem('token')

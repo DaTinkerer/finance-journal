@@ -47,7 +47,7 @@ export default {
 
         axios({
             method: 'POST',
-            url: 'http://localhost:8000/auth/password/reset/',
+            url: 'http://198.211.106.130/auth/password/reset/',
             headers: {'Content-Type': 'application/json'},
             data: {'email': this.email}
         }).then(response => {

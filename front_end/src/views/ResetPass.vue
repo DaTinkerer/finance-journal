@@ -64,7 +64,7 @@ export default {
             resetPassword () {
                 axios({
                     method: 'POST',
-                    url: `http://localhost:8000/password-reset-confirm/${this.uid}/${this.token}/`,
+                    url: `http://198.211.106.130/password-reset-confirm/${this.uid}/${this.token}/`,
                     headers: {'Content-Type': 'application/json'},
                     data: {
                         
