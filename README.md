@@ -4,5 +4,5 @@ It has basic CRUD functionality and also comes with authentication endpoints wit
 
 ![](../screenshots/table.png?raw=true "Sending habits displayed in a table")
 
-![](../screenshots/edit.png?raw=true "Modal used to edit an entry")
+![](../screenshots/Edit.png?raw=true "Modal used to edit an entry")
 
