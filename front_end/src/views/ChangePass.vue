@@ -88,10 +88,17 @@ export default {
 
 <style lang="scss">
 .changepass {
+  @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+    
+    
+  }
   background: #afe7a1;
   height: 100vh;
   width: 100vw;
   position: fixed;
+  
 }
 .change-section {
   display: flex;
@@ -104,7 +111,7 @@ export default {
 
   background: #f5f4f2;
 
-  width: 1000%;
+  width: 100%;
   margin: auto;
   margin-top: 6em;
 

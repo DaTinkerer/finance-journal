@@ -113,6 +113,12 @@ export default {
 
 <style scoped lang="scss">
 .register {
+  @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+    
+    
+  }
   background: #afe7a1;
   height: 100vh;
   width: 100vw;
@@ -134,6 +140,9 @@ export default {
   width: 100%;
   margin: auto;
   margin-top: 6em;
+  
+  
+  
 
   .form {
     width: 100%;

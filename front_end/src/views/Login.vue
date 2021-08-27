@@ -85,6 +85,12 @@ export default {
 
 <style scoped lang="scss">
 .login {
+  @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+    
+    
+  }
   background: #afe7a1;
   height: 100vh;
   width: 100vw;

@@ -44,7 +44,7 @@ export default {
     sendLink() {
       axios({
         method: "POST",
-        url: "http://198.211.106.130/auth/password/reset/",
+        url: "http://localhost:8000/auth/password/reset/",
         headers: { "Content-Type": "application/json" },
         data: { email: this.email },
       })
@@ -66,6 +66,12 @@ export default {
 
 <style scoped lang="scss">
 .forgotpass {
+  @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+    
+    
+  }
   background: #afe7a1;
   height: 100vh;
   width: 100vw;
