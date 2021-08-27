@@ -1,93 +1,87 @@
-import { createRouter } from 'vue-router'
-import Login from '../views/Login.vue'
-import List from '../views/List.vue'
-import Register from '../views/Register.vue'
-import ResetPass from '../views/ResetPass.vue'
-import ForgotPassword from '../views/ForgotPassword.vue'
-import ChangePass from '../views/ChangePass.vue'
-
-
-
+import { createRouter, createWebHashHistory } from "vue-router";
+import Login from "../views/Login.vue";
+import List from "../views/List.vue";
+import Register from "../views/Register.vue";
+import ResetPass from "../views/ResetPass.vue";
+import ForgotPassword from "../views/ForgotPassword.vue";
+import ChangePass from "../views/ChangePass.vue";
+import Home from "../views/Home.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'Login',
-    component: Login
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/register',
-    name: 'Register',
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "Register",
     component: Register,
   },
   {
-    path: '/list',
-    name: 'List',
+    path: "/list",
+    name: "List",
     component: List,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
+  
   {
-    path: '/password-reset-confirm/:uid/:token',
-    name: 'ResetPass',
+    path: "/password-reset-confirm/:uid/:token",
+    name: "ResetPass",
     component: ResetPass,
   },
   {
-    path: '/forgot-password',
-    name: 'ForgotPassword',
+    path: "/forgot-password",
+    name: "ForgotPassword",
     component: ForgotPassword,
   },
   {
-    path: '/change-password',
-    name: 'ChangePass',
+    path: "/change-password",
+    name: "ChangePass",
     component: ChangePass,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
-  
-]
-
-
+];
 
 const router = createRouter({
-  mode: 'history',
-  routes
-  
-})
+  history: createWebHashHistory(),
+  routes,
+});
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.path == '/')) {
-    if (localStorage.getItem('token') != null) {
+  if (to.matched.some((record) => record.path == "/")) {
+    if (localStorage.getItem("token") != null) {
       next({
-        path: '/list',
-        
-      })
+        path: "/list",
+      });
+    } else {
+      next();
     }
-    else {
-      next()
-    }
+  } else {
+    next();
   }
-  else {
-    next()
-  }
-})
+});
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('token') == null) {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (localStorage.getItem("token") == null) {
       next({
-        path: '/',
-        
-      })
+        path: "/",
+      });
+    } else {
+      next();
     }
-    else {
-      next()
-    }
+  } else {
+    next();
   }
-  else {
-    next()
-  }
-})
+});
 
-export default router
+export default router;
