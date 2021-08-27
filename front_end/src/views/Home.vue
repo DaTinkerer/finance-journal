@@ -37,6 +37,10 @@ export default {
 
 <style scoped lang="scss">
 .home {
+  @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+  }
   background: #afe7a1;
   height: 100vh;
   min-width: 100vw;
@@ -112,6 +116,7 @@ export default {
 
   .text {
     font-size: 64px;
+    color: #23640c;
   }
   @media (max-width: 760px) {
     margin-left: 3em;

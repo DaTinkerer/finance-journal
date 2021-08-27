@@ -1,5 +1,6 @@
 <template>
   <div class="changepass">
+    <div>
     <div class="change-section">
       <div class="form">
         <h1 class="title">Change Password</h1>
@@ -39,6 +40,7 @@
         </form>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -86,19 +88,16 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .changepass {
-  @media (orientation: landscape) {
-    height: 200vh;
-    position: absolute;
-    
-    
-  }
   background: #afe7a1;
   height: 100vh;
   width: 100vw;
   position: fixed;
-  
+  @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+  }
 }
 .change-section {
   display: flex;
@@ -109,9 +108,9 @@ export default {
   border-radius: 1em;
   box-shadow: 1px 3px 3px #888888;
 
-  background: #f5f4f2;
+  background: #fff;
 
-  width: 100%;
+
   margin: auto;
   margin-top: 6em;
 
@@ -159,7 +158,14 @@ export default {
 
     p {
       margin-left: 2.5em;
+      
+      
     }
+    @media (max-width: 500px) {
+      margin-bottom: 1em;
+    
+    
+  }
   }
 
   .error {
@@ -168,13 +174,20 @@ export default {
   }
   .success {
     color: #5f8d53;
+    display: block;
+    margin-right: 1em;
+  }
+  @media (max-width: 500px) {
+    padding: 0;
+    margin-top: 3em;
+    margin-left: 1em;
+    margin-right: 1em;
+    
+    
   }
 }
 @media (max-width: 620px) {
-  .change-section {
-    width: 100%;
-  }
-  .change-section .form .form-inputs {
+  .change-section .form .form-inputs{
     width: 50%;
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <div>
     <div class="login-section">
       <div class="form">
         <h1 class="title">Log In</h1>
@@ -47,6 +48,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -88,8 +90,6 @@ export default {
   @media (orientation: landscape) {
     height: 200vh;
     position: absolute;
-    
-    
   }
   background: #afe7a1;
   height: 100vh;
@@ -106,9 +106,9 @@ export default {
   border-radius: 1em;
   box-shadow: 1px 3px 3px #888888;
 
-  background: #f5f4f2;
+  background: #fff;
 
-  width: 100%;
+  
   margin: auto;
   margin-top: 6em;
 
@@ -180,14 +180,19 @@ export default {
   strong {
     color: rgb(224, 9, 9);
     display: block;
+    margin-top: 1em;
+  }
+  @media (max-width: 500px) {
+    padding: 0;
     margin-top: 3em;
+    margin-left: 1em;
+    margin-right: 1em;
+    
+    
   }
 }
 @media (max-width: 620px) {
-  .login-section {
-    width: 100%;
-  }
-  .login-section .form .form-inputs {
+  .login-section .form {
     width: 50%;
   }
 }

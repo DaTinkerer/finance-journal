@@ -1,5 +1,6 @@
 <template>
   <div class="forgotpass">
+    <div>
     <div class="email-section">
       <div class="form">
         <h1 class="title">Reset Password</h1>
@@ -25,6 +26,7 @@
         </form>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -69,8 +71,6 @@ export default {
   @media (orientation: landscape) {
     height: 200vh;
     position: absolute;
-    
-    
   }
   background: #afe7a1;
   height: 100vh;
@@ -87,9 +87,9 @@ export default {
   border-radius: 1em;
   box-shadow: 1px 3px 3px #888888;
 
-  background: #f5f4f2;
+  background: #fff;
 
-  width: 100%;
+  
   margin: auto;
   margin-top: 6em;
 
@@ -132,6 +132,11 @@ export default {
       p {
         margin-left: 1.9em;
       }
+      @media (max-width: 500px) {
+      margin-bottom: 1em;
+    
+    
+  }
     }
 
     .error {
@@ -142,12 +147,20 @@ export default {
       color: #5f8d53;
     }
   }
+@media (max-width: 500px) {
+    padding: 0;
+    margin-top: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
+    
+    
+  }
+ 
+  
 }
 
+
 @media (max-width: 620px) {
-  .email-section {
-    width: 100%;
-  }
   .email-section .form .form-inputs {
     width: 50%;
   }

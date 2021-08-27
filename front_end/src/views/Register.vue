@@ -1,5 +1,7 @@
 <template>
+
   <div class="register">
+    <div>
     <div class="register-section">
       <div class="form">
         <h1 class="title">Register</h1>
@@ -46,7 +48,7 @@
 
           <input type="submit" style="position: absolute; left: -9999px" />
 
-          <div @click="signUpForm" class="submit">
+          <div @click="signUp" class="submit">
             <p>Sign Up</p>
           </div>
         </form>
@@ -60,6 +62,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -80,7 +83,7 @@ export default {
   },
   props: {},
   methods: {
-    signUpForm() {
+    signUp() {
       axios({
         method: "POST",
         url: "http://localhost:8000/register/",
@@ -113,16 +116,14 @@ export default {
 
 <style scoped lang="scss">
 .register {
-  @media (orientation: landscape) {
-    height: 200vh;
-    position: absolute;
-    
-    
-  }
   background: #afe7a1;
   height: 100vh;
   width: 100vw;
   position: fixed;
+  @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+  }
 }
 
 .register-section {
@@ -135,14 +136,11 @@ export default {
   border-radius: 1em;
   box-shadow: 1px 3px 3px #888888;
 
-  background: #f5f4f2;
+  background: #fff;
 
-  width: 100%;
+
   margin: auto;
   margin-top: 6em;
-  
-  
-  
 
   .form {
     width: 100%;
@@ -197,20 +195,23 @@ export default {
     .links {
       margin-top: 2em;
       margin-right: 21em;
+      @media (max-width: 620px){
+        margin-right: 1em;
+      }
+
     }
     .form-links {
       margin-top: 1em;
       color: #137911;
     }
   }
-  .links p {
-    &:hover {
-      cursor: pointer;
-    }
-  }
+
 
   a {
     text-decoration: none;
+    :hover {
+      cursor: pointer;
+    }
   }
   .error {
     color: rgb(224, 9, 9);
@@ -221,13 +222,18 @@ export default {
   .success {
     color: #5f8d53;
   }
+  @media (max-width: 500px) {
+    padding: 0;
+    margin-top: 3em;
+    margin-left: 1em;
+    margin-right: 1em;
+
+
+  }
 }
 
 @media (max-width: 620px) {
-  .register-section {
-    width: 100%;
-  }
-  .register-section .form .form-inputs {
+  .register-section .form {
     width: 50%;
   }
 }
