@@ -6,11 +6,9 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-
-
 class Entry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    
+
     cost = models.DecimalField(max_digits=11, decimal_places=2, default=0)
 
     # define spending categories
@@ -33,10 +31,9 @@ class Entry(models.Model):
     travel = 'Travel'
     utilities = 'Utilities'
 
-
     # store them in list of tuples
     spending_categories = [
-        (groc,'Groceries' ),
+        (groc, 'Groceries'),
         (dinning, 'Dinning and Drinks'),
         (no_cat, 'Uncategorized'),
         (charity, 'Charity'),
@@ -62,10 +59,10 @@ class Entry(models.Model):
         default=no_cat,
     )
 
-
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-date']
+
     def __str__(self):
         return self.category
