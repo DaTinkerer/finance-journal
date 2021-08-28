@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from "../views/Login.vue";
-import List from "../views/List.vue";
+import Expenses from "../views/Expenses.vue";
 import Register from "../views/Register.vue";
 import ResetPass from "../views/ResetPass.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
@@ -25,9 +25,9 @@ const routes = [
     component: Register,
   },
   {
-    path: "/list",
-    name: "List",
-    component: List,
+    path: "/expenses",
+    name: "Expenses",
+    component: Expenses,
     meta: {
       requiresAuth: true,
     },
@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.path == "/")) {
     if (localStorage.getItem("token") != null) {
       next({
-        path: "/list",
+        path: "/expenses",
       });
     } else {
       next();

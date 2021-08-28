@@ -74,7 +74,7 @@ export default {
           password: this.password,
         })
         .then(() => {
-          this.$router.push({ name: "List" });
+          this.$router.push({ name: "Expenses" });
         })
         .catch((err) => {
           console.log(err);

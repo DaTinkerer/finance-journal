@@ -6,9 +6,9 @@
       <div class="form">
         <h1 class="title">Register</h1>
 
-        <form @submit.prevent="signUpForm" class="login-form">
+        <form @submit.prevent="signUp" class="login-form">
           <strong v-if="wrong_cred" class="error">Invalid Fields</strong>
-          <p class="success" v-if="success">{{ success_msg.detail }}</p>
+          <p class="success" v-if="success">Successfully created account</p>
           <div class="email-div">
             <label for="email" class="form-label">Email:</label>
             <div>
@@ -86,7 +86,7 @@ export default {
     signUp() {
       axios({
         method: "POST",
-        url: "http://localhost:8000/register/",
+        url: "https://api.budgetbook.live/register/",
         headers: { "Content-Type": "application/json" },
         data: {
           email: this.email,

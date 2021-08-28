@@ -53,17 +53,15 @@ export default {
       uid: this.$route.params.uid,
       token: this.$route.params.token,
       wrong_cred: false,
-
       success: false,
       success_msg: "",
     };
   },
-
   methods: {
     resetPassword() {
       axios({
         method: "POST",
-        url: `http://localhost:8000/password-reset-confirm/${this.uid}/${this.token}/`,
+        url: `https://api.budgetbook.live/password-reset-confirm/${this.uid}/${this.token}/`,
         headers: { "Content-Type": "application/json" },
         data: {
           new_password1: this.newpass1,
@@ -77,13 +75,10 @@ export default {
           this.wrong_cred = false;
           this.success = true;
         })
-
         .then(() => new Promise((resolve) => setTimeout(resolve, 1000)))
-
         .then(() => {
           this.$router.push({ name: "Login" });
         })
-
         .catch((err) => {
           console.log(err);
           this.wrong_cred = true;
@@ -104,27 +99,20 @@ export default {
   width: 100vw;
   position: fixed;
 }
-
 .reset-section {
   display: flex;
-
   padding: 2em;
-
   max-width: 531.5px;
   border-radius: 1em;
   box-shadow: 1px 3px 3px #888888;
-
   background: #fff;
-
   margin: auto;
   margin-top: 6em;
-
   .form {
     width: 100%;
     margin-left: 2em;
     margin-right: 2em;
   }
-
   .title {
     font-weight: 400;
   }
@@ -136,7 +124,6 @@ export default {
     margin-top: 2em;
     font-weight: 400;
   }
-
   input {
     width: 100%;
     margin-top: 2em;
@@ -145,7 +132,6 @@ export default {
     box-sizing: border-box;
     border: #aaaaaa 0.2em solid;
   }
-
   .submit {
     margin-top: 2em;
     background: #afe7a1;
@@ -157,10 +143,8 @@ export default {
       background: #5f8d53;
       color: white;
       transition-duration: 0.2s;
-
       cursor: pointer;
     }
-
     p {
       margin-left: 2.5em;
     }
@@ -168,7 +152,6 @@ export default {
       margin-bottom: 1em;
     }
   }
-
   .error {
     color: rgb(224, 9, 9);
     display: block;

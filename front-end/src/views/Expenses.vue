@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div class="expenses">
     <div class="container">
       <div class="navbar-container">
         <h2 class="title">Expenses</h2>
@@ -223,7 +223,7 @@
 import axiosInstance from "../main.js";
 
 export default {
-  name: "List",
+  name: "Expenses",
   data() {
     return {
       entries: [],
@@ -297,9 +297,7 @@ export default {
             id: x.id,
           }));
         })
-        .then(() => {
-          console.log(this.entries.date);
-        })
+
         .catch((err) => {
           console.log(err);
         });

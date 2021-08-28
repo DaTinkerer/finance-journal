@@ -76,7 +76,7 @@ export default {
         .then(() => new Promise((resolve) => setTimeout(resolve, 1000)))
 
         .then(() => {
-          this.$router.push({ name: "List" });
+          this.$router.push({ name: "Expenses" });
         })
 
         .catch((err) => {
