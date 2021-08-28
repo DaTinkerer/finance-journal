@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router'
 import Login from "../views/Login.vue";
 import List from "../views/List.vue";
 import Register from "../views/Register.vue";
@@ -6,6 +6,7 @@ import ResetPass from "../views/ResetPass.vue";
 import ForgotPassword from "../views/ForgotPassword.vue";
 import ChangePass from "../views/ChangePass.vue";
 import Home from "../views/Home.vue";
+
 
 const routes = [
   {
@@ -53,9 +54,10 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
-});
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.path == "/")) {
     if (localStorage.getItem("token") != null) {
@@ -84,4 +86,4 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-export default router;
+export default router
