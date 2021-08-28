@@ -116,7 +116,6 @@ export default {
 
   background: #fff;
 
-
   margin: auto;
   margin-top: 6em;
 
@@ -167,7 +166,7 @@ export default {
     }
     @media (max-width: 500px) {
       margin-bottom: 1em;
-  }
+    }
   }
 
   .error {
@@ -176,22 +175,21 @@ export default {
   }
   .success {
     color: #5f8d53;
+    display: block;
+    @media (max-width: 500px) {
+      width: 50%;
+    }
   }
   @media (max-width: 500px) {
     padding: 0;
     margin-top: 3em;
     margin-left: 1em;
     margin-right: 1em;
-    
-    
   }
-
-  
 }
 @media (max-width: 620px) {
-    
-    .reset-section .form .form-inputs {
-      width: 50%;
-    }
+  .reset-section .form .form-inputs {
+    width: 50%;
   }
+}
 </style>

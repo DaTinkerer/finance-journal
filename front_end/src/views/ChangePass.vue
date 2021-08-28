@@ -1,46 +1,46 @@
 <template>
   <div class="changepass">
     <div>
-    <div class="change-section">
-      <div class="form">
-        <h1 class="title">Change Password</h1>
-        <strong v-if="wrong_cred" class="error">Invalid Fields</strong>
-        <p class="success" v-if="success">{{ success_msg.detail }}</p>
-        <form @submit.prevent="changePassword" class="login-form">
-          <div class="password-div">
-            <label for="password" class="form-label">New Password:</label>
-            <div>
-              <input
-                v-model="newpass1"
-                type="password"
-                name="password"
-                class="form-inputs"
-              />
+      <div class="change-section">
+        <div class="form">
+          <h1 class="title">Change Password</h1>
+          <strong v-if="wrong_cred" class="error">Invalid Fields</strong>
+          <p class="success" v-if="success">{{ success_msg.detail }}</p>
+          <form @submit.prevent="changePassword" class="login-form">
+            <div class="password-div">
+              <label for="password" class="form-label">New Password:</label>
+              <div>
+                <input
+                  v-model="newpass1"
+                  type="password"
+                  name="password"
+                  class="form-inputs"
+                />
+              </div>
             </div>
-          </div>
 
-          <div class="password2-div">
-            <label for="password2" class="form-label"
-              >Re-enter New Password:</label
-            >
-            <div>
-              <input
-                v-model="newpass2"
-                type="password"
-                name="password2"
-                class="form-inputs"
-              />
+            <div class="password2-div">
+              <label for="password2" class="form-label"
+                >Re-enter New Password:</label
+              >
+              <div>
+                <input
+                  v-model="newpass2"
+                  type="password"
+                  name="password2"
+                  class="form-inputs"
+                />
+              </div>
             </div>
-          </div>
-          <input type="submit" style="position: absolute; left: -9999px" />
+            <input type="submit" style="position: absolute; left: -9999px" />
 
-          <div @click="changePassword" class="submit">
-            <p>Change</p>
-          </div>
-        </form>
+            <div @click="changePassword" class="submit">
+              <p>Change</p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -110,7 +110,6 @@ export default {
 
   background: #fff;
 
-
   margin: auto;
   margin-top: 6em;
 
@@ -158,14 +157,10 @@ export default {
 
     p {
       margin-left: 2.5em;
-      
-      
     }
     @media (max-width: 500px) {
       margin-bottom: 1em;
-    
-    
-  }
+    }
   }
 
   .error {
@@ -182,12 +177,10 @@ export default {
     margin-top: 3em;
     margin-left: 1em;
     margin-right: 1em;
-    
-    
   }
 }
 @media (max-width: 620px) {
-  .change-section .form .form-inputs{
+  .change-section .form .form-inputs {
     width: 50%;
   }
 }

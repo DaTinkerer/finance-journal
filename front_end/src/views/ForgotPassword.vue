@@ -1,32 +1,32 @@
 <template>
   <div class="forgotpass">
     <div>
-    <div class="email-section">
-      <div class="form">
-        <h1 class="title">Reset Password</h1>
-        <strong v-if="wrong_cred" class="error">Email is Invalid</strong>
-        <p class="success" v-if="success">{{ success_msg.detail }}</p>
-        <form @submit.prevent="sendLink" class="login-form">
-          <div class="email-div">
-            <label for="email" class="form-label">Email:</label>
-            <div>
-              <input
-                v-model="email"
-                type="email"
-                name="eamil"
-                class="form-inputs"
-              />
+      <div class="email-section">
+        <div class="form">
+          <h1 class="title">Reset Password</h1>
+          <strong v-if="wrong_cred" class="error">Email is Invalid</strong>
+          <p class="success" v-if="success">{{ success_msg.detail }}</p>
+          <form @submit.prevent="sendLink" class="login-form">
+            <div class="email-div">
+              <label for="email" class="form-label">Email:</label>
+              <div>
+                <input
+                  v-model="email"
+                  type="email"
+                  name="eamil"
+                  class="form-inputs"
+                />
+              </div>
             </div>
-          </div>
-          <input type="submit" style="position: absolute; left: -9999px" />
+            <input type="submit" style="position: absolute; left: -9999px" />
 
-          <div @click="sendLink" class="submit">
-            <p>Send Link</p>
-          </div>
-        </form>
+            <div @click="sendLink" class="submit">
+              <p>Send Link</p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -89,7 +89,6 @@ export default {
 
   background: #fff;
 
-  
   margin: auto;
   margin-top: 6em;
 
@@ -133,10 +132,8 @@ export default {
         margin-left: 1.9em;
       }
       @media (max-width: 500px) {
-      margin-bottom: 1em;
-    
-    
-  }
+        margin-bottom: 1em;
+      }
     }
 
     .error {
@@ -147,18 +144,13 @@ export default {
       color: #5f8d53;
     }
   }
-@media (max-width: 500px) {
+  @media (max-width: 500px) {
     padding: 0;
     margin-top: 2em;
     margin-left: 1em;
     margin-right: 1em;
-    
-    
   }
- 
-  
 }
-
 
 @media (max-width: 620px) {
   .email-section .form .form-inputs {
