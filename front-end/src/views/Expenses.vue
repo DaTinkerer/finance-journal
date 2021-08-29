@@ -53,7 +53,7 @@
           </tbody>
         </table>
 
-        <p v-if="entries == ''">No expenses yet</p>
+        <p class="default-msg" v-if="entries == ''">No expenses yet</p>
       </div>
 
       <!-- overlay that goes underneath edit and create form modals -->
@@ -315,7 +315,7 @@ export default {
     },
 
     goToChangePass() {
-      this.$router.push({ name: "ChangePass" });
+      this.$router.push({ name: "Change Password" });
     },
   },
 };
@@ -460,6 +460,12 @@ $primary-hover: #5f8d53;
 
   td {
     font-weight: 200;
+  }
+
+  .default-msg {
+    @media (max-width: 500px) {
+      margin-left: .7em;
+    }
   }
 }
 

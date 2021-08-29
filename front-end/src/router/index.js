@@ -35,17 +35,17 @@ const routes = [
   
   {
     path: "/password-reset-confirm/:uid/:token",
-    name: "ResetPass",
+    name: "Reset Password",
     component: ResetPass,
   },
   {
     path: "/forgot-password",
-    name: "ForgotPassword",
+    name: "Forgot Password",
     component: ForgotPassword,
   },
   {
     path: "/change-password",
-    name: "ChangePass",
+    name: "Change Password",
     component: ChangePass,
     meta: {
       requiresAuth: true,
@@ -84,6 +84,10 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+});
+router.beforeEach((to, from, next) => {
+  document.title = `${process.env.VUE_APP_TITLE} | ${to.name}`
+  next()
 });
 
 export default router
