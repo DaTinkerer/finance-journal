@@ -72,6 +72,10 @@ export default {
     height: 200vh;
     position: absolute;
   }
+  @media (max-width: 500px) {
+    height: 200vh;
+    position: absolute;
+  }
   background: #afe7a1;
   height: 100vh;
   width: 100vw;

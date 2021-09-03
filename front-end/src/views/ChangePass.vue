@@ -4,7 +4,7 @@
       <div class="change-section">
         <div class="form">
           <h1 class="title">Change Password</h1>
-          <strong v-if="wrong_cred" class="error">Invalid Fields</strong>
+          <strong v-if="wrong_cred" class="error">{{ passwd_msg }}</strong>
           <p class="success" v-if="success">{{ success_msg.detail }}</p>
           <form @submit.prevent="changePassword" class="login-form">
             <div class="password-div">
@@ -57,6 +57,8 @@ export default {
 
       success: false,
       success_msg: "",
+
+      passwd_msg: [],
     };
   },
 
@@ -80,7 +82,14 @@ export default {
         })
 
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data);
+          if (err.response.data.new_password2 != null) {
+            this.passwd_msg = err.response.data.new_password2
+              .toString()
+              .replace(/,+/g, " ");
+          } else {
+            this.passwd_msg = "";
+          }
           this.wrong_cred = true;
         });
     },
@@ -95,6 +104,10 @@ export default {
   width: 100vw;
   position: fixed;
   @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+  }
+  @media (max-width: 500px) {
     height: 200vh;
     position: absolute;
   }
@@ -166,6 +179,9 @@ export default {
   .error {
     color: rgb(224, 9, 9);
     display: block;
+    @media (max-width: 500px) {
+      font-size: 12px;
+    }
   }
   .success {
     color: #5f8d53;

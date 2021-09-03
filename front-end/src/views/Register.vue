@@ -1,68 +1,79 @@
 <template>
-
   <div class="register">
     <div>
-    <div class="register-section">
-      <div class="form">
-        <h1 class="title">Register</h1>
+      <div class="register-section">
+        <div class="form">
+          <h1 class="title">Register</h1>
 
-        <form @submit.prevent="signUp" class="login-form">
-          <strong v-if="wrong_cred" class="error">Invalid Fields</strong>
-          <p class="success" v-if="success">Successfully created account</p>
-          <div class="email-div">
-            <label for="email" class="form-label">Email:</label>
-            <div>
-              <input
-                v-model="email"
-                type="email"
-                name="eamil"
-                class="form-inputs"
-              />
+          <form @submit.prevent="signUp" class="login-form">
+            <strong v-if="wrong_cred" class="error">{{ nfe_msg }}</strong>
+
+            <p class="success" v-if="success">Successfully created account</p>
+            <div class="email-div">
+              <label for="email" class="form-label">Email:</label>
+              <strong v-if="wrong_cred" class="error">{{
+                email_err_msg
+              }}</strong>
+              <div>
+                <input
+                  v-model="email"
+                  type="email"
+                  name="eamil"
+                  class="form-inputs"
+                />
+              </div>
             </div>
-          </div>
 
-          <div class="password-div">
-            <label for="password" class="form-label">Password:</label>
-            <div>
-              <input
-                v-model="password1"
-                type="password"
-                name="password"
-                class="form-inputs"
-              />
+            <div class="password-div">
+              <label for="password" class="form-label">Password:</label>
+              <strong v-if="wrong_cred" class="error">{{
+                passwd1_err_msg
+              }}</strong>
+              <div>
+                <input
+                  v-model="password1"
+                  type="password"
+                  name="password"
+                  class="form-inputs"
+                />
+              </div>
             </div>
-          </div>
 
-          <div class="password2-div">
-            <label for="password2" class="form-label">Re-enter Password:</label>
+            <div class="password2-div">
+              <label for="password2" class="form-label"
+                >Re-enter Password:</label
+              >
+              <strong v-if="wrong_cred" class="error">
+                {{ passwd2_err_msg }}
+              </strong>
 
-            <div>
-              <input
-                v-model="password2"
-                type="password"
-                name="password2"
-                class="form-inputs"
-              />
+              <div>
+                <input
+                  v-model="password2"
+                  type="password"
+                  name="password2"
+                  class="form-inputs"
+                />
+              </div>
             </div>
-          </div>
 
-          <input type="submit" style="position: absolute; left: -9999px" />
+            <input type="submit" style="position: absolute; left: -9999px" />
 
-          <div @click="signUp" class="submit">
-            <p>Sign Up</p>
+            <div @click="signUp" class="submit">
+              <p>Sign Up</p>
+            </div>
+          </form>
+          <div class="links">
+            <router-link to="/login"
+              ><p class="form-links">Log In</p></router-link
+            >
+            <router-link to="forgot-password"
+              ><p class="form-links">Forgot Password?</p></router-link
+            >
           </div>
-        </form>
-        <div class="links">
-          <router-link to="/login"
-            ><p class="form-links">Log In</p></router-link
-          >
-          <router-link to="forgot-password"
-            ><p class="form-links">Forgot Password?</p></router-link
-          >
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -78,7 +89,12 @@ export default {
       wrong_cred: false,
 
       success: false,
-      success_msg: "",
+      err_msg: {},
+
+      email_err_msg: [],
+      passwd1_err_msg: [],
+      passwd2_err_msg: [],
+      nfe_msg: [],
     };
   },
   props: {},
@@ -105,7 +121,44 @@ export default {
           this.$router.push({ name: "Login" });
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data);
+          this.err_msg = "";
+          this.err_msg = err.response.data;
+          console.log(err.response.data.password1);
+
+          // converts the err message arrays into strings on changes the commas, if any
+          // to spaces with regex
+
+          // going through each possible key value for the backend error messages and
+          // displaying them if they exist
+          if (err.response.data.email != null) {
+            this.email_err_msg = err.response.data.email
+              .toString()
+              .replace(/,+/g, " ");
+          } else {
+            this.email_err_msg = "";
+          }
+          if (err.response.data.password1 != null) {
+            this.passwd1_err_msg = err.response.data.password1
+              .toString()
+              .replace(/,+/g, " ");
+          } else {
+            this.passwd1_err_msg = "";
+          }
+          if (err.response.data.password2 != null) {
+            this.passwd2_err_msg = err.response.data.password2
+              .toString()
+              .replace(/,+/g, " ");
+          } else {
+            this.passwd2_err_msg = "";
+          }
+          if (err.response.data.non_field_errors != null) {
+            this.nfe_msg = err.response.data.non_field_errors
+              .toString()
+              .replace(/\[\]"+/g, "");
+          } else {
+            this.nfe_msg = "";
+          }
 
           this.wrong_cred = true;
         });
@@ -121,6 +174,10 @@ export default {
   width: 100vw;
   position: fixed;
   @media (orientation: landscape) {
+    height: 300vh;
+    position: absolute;
+  }
+  @media (max-width: 500px) {
     height: 200vh;
     position: absolute;
   }
@@ -137,7 +194,6 @@ export default {
   box-shadow: 1px 3px 3px #888888;
 
   background: #fff;
-
 
   margin: auto;
   margin-top: 6em;
@@ -195,17 +251,15 @@ export default {
     .links {
       margin-top: 2em;
       margin-right: 21em;
-      @media (max-width: 620px){
+      @media (max-width: 620px) {
         margin-right: 1em;
       }
-
     }
     .form-links {
       margin-top: 1em;
       color: #137911;
     }
   }
-
 
   a {
     text-decoration: none;
@@ -217,6 +271,9 @@ export default {
     color: rgb(224, 9, 9);
     display: block;
     margin-top: 1em;
+    @media (max-width: 500px) {
+      font-size: 12px;
+    }
   }
 
   .success {
@@ -227,8 +284,6 @@ export default {
     margin-top: 3em;
     margin-left: 1em;
     margin-right: 1em;
-
-
   }
 }
 

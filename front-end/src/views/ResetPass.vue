@@ -3,11 +3,12 @@
     <div class="reset-section">
       <div class="form">
         <h1 class="title">Reset Password</h1>
-        <strong v-if="wrong_cred" class="error">Invalid Fields</strong>
+
         <p class="success" v-if="success">{{ success_msg.detail }}</p>
         <form @submit.prevent="resetPassword" class="login-form">
           <div class="password-div">
             <label for="password" class="form-label">New Password:</label>
+            <strong v-if="wrong_cred" class="error">{{ passwd_msg1 }}</strong>
             <div>
               <input
                 v-model="newpass1"
@@ -22,6 +23,7 @@
             <label for="password2" class="form-label"
               >Re-enter New Password:</label
             >
+            <strong v-if="wrong_cred" class="error">{{ passwd_msg2 }}</strong>
             <div>
               <input
                 v-model="newpass2"
@@ -55,6 +57,8 @@ export default {
       wrong_cred: false,
       success: false,
       success_msg: "",
+      passwd_msg1: [],
+      passwd_msg2: [],
     };
   },
   methods: {
@@ -80,7 +84,21 @@ export default {
           this.$router.push({ name: "Login" });
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data);
+          if (err.response.data.new_password1 != null) {
+            this.passwd_msg = err.response.data.new_password1
+              .toString()
+              .replace(/,+/g, " ");
+          } else {
+            this.passwd_msg1 = "";
+          }
+          if (err.response.data.new_password2 != null) {
+            this.passwd_msg = err.response.data.new_password2
+              .toString()
+              .replace(/,+/g, " ");
+          } else {
+            this.passwd_msg2 = "";
+          }
           this.wrong_cred = true;
         });
     },
@@ -91,6 +109,10 @@ export default {
 <style scoped lang="scss">
 .resetpass {
   @media (orientation: landscape) {
+    height: 200vh;
+    position: absolute;
+  }
+  @media (max-width: 500px) {
     height: 200vh;
     position: absolute;
   }
@@ -155,6 +177,9 @@ export default {
   .error {
     color: rgb(224, 9, 9);
     display: block;
+    @media (max-width: 500px) {
+      font-size: 12px;
+    }
   }
   .success {
     color: #5f8d53;

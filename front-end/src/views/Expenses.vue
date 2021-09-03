@@ -464,7 +464,7 @@ $primary-hover: #5f8d53;
 
   .default-msg {
     @media (max-width: 500px) {
-      margin-left: .7em;
+      margin-left: 0.7em;
     }
   }
 }
