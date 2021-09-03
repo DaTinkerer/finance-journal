@@ -86,14 +86,14 @@ export default {
         .catch((err) => {
           console.log(err.response.data);
           if (err.response.data.new_password1 != null) {
-            this.passwd_msg = err.response.data.new_password1
+            this.passwd_msg1 = err.response.data.new_password1
               .toString()
               .replace(/,+/g, " ");
           } else {
             this.passwd_msg1 = "";
           }
           if (err.response.data.new_password2 != null) {
-            this.passwd_msg = err.response.data.new_password2
+            this.passwd_msg2 = err.response.data.new_password2
               .toString()
               .replace(/,+/g, " ");
           } else {
@@ -114,7 +114,7 @@ export default {
   }
   @media (max-width: 500px) {
     height: 200vh;
-    position: absolute;
+    
   }
   background: #afe7a1;
   height: 100vh;
@@ -177,8 +177,10 @@ export default {
   .error {
     color: rgb(224, 9, 9);
     display: block;
+    margin-top: 1em;
     @media (max-width: 500px) {
       font-size: 12px;
+      width: 50%;
     }
   }
   .success {

@@ -109,7 +109,7 @@ export default {
   }
   @media (max-width: 500px) {
     height: 200vh;
-    position: absolute;
+    
   }
 }
 .change-section {
@@ -181,6 +181,7 @@ export default {
     display: block;
     @media (max-width: 500px) {
       font-size: 12px;
+      width: 50%;
     }
   }
   .success {
