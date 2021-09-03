@@ -126,7 +126,7 @@ export default {
           this.err_msg = err.response.data;
           console.log(err.response.data.password1);
 
-          // converts the err message arrays into strings on changes the commas, if any
+          // converts the err message arrays into strings and changes the commas, if any
           // to spaces with regex
 
           // going through each possible key value for the backend error messages and
