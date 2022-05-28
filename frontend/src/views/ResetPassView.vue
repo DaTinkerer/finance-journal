@@ -65,7 +65,7 @@ export default {
     resetPassword() {
       axios({
         method: "POST",
-        url: `http://localhost:8000/password-reset-confirm/${this.uid}/${this.token}/`,
+        url: `https://api.budgetbook.live/password-reset-confirm/${this.uid}/${this.token}/`,
         headers: { "Content-Type": "application/json" },
         data: {
           new_password1: this.newpass1,

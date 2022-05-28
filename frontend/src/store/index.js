@@ -18,7 +18,7 @@ export default createStore({
       return new Promise((resolve, reject) => {
         axios({
           method: "POST",
-          url: "http://localhost:8000/auth/login/",
+          url: "https://api.budgetbook.live/auth/login/",
           headers: { "Content-Type": "application/json" },
           data: {
             email: data.email,
@@ -39,7 +39,7 @@ export default createStore({
       return new Promise((resolve) => {
         axios({
           method: "POST",
-          url: "http://localhost:8000/auth/logout/",
+          url: "https://api.budgetbook.live/auth/logout/",
           headers: { "Content-Type": "application/json" },
         })
           .then(() => {

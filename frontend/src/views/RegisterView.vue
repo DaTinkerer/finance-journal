@@ -100,7 +100,7 @@ export default {
     signUp() {
       axios({
         method: "POST",
-        url: "http://localhost:8000/register/",
+        url: "https://api.budgetbook.live/register/",
         headers: { "Content-Type": "application/json" },
         data: {
           email: this.email,

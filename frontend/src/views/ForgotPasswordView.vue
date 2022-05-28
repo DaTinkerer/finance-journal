@@ -46,7 +46,7 @@ export default {
     sendLink() {
       axios({
         method: "POST",
-        url: "http://localhost:8000/auth/password/reset/",
+        url: "https://api.budgetbook.live/auth/password/reset/",
         headers: { "Content-Type": "application/json" },
         data: { email: this.email },
       })

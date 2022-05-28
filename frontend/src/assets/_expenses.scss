@@ -1,0 +1,189 @@
+.expenses {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  @media screen and (min-width: 500px) {
+    position: initial;
+  }
+}
+.navbar-container {
+  .title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: $dark-green;
+
+    @media screen and (min-width: 500px) {
+      font-size: 2rem;
+    }
+  }
+  @media screen and (min-width: 500px) {
+    min-width: 20rem;
+  }
+  background-color: $light-green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title {
+    margin-left: 1rem;
+    @media screen and (min-width: 499px) {
+      margin-left: 3rem;
+    }
+  }
+  .burger-menu {
+    margin-right: 1rem;
+    @media screen and (min-width: 499px) {
+      margin-right: 3rem;
+    }
+  }
+  .dropdown-content {
+    display: none;
+  }
+}
+
+.data-section {
+  display: grid;
+  place-items: center;
+  overflow: auto;
+  .table {
+    border-collapse: collapse;
+    text-align: left;
+    margin: 3rem 1rem;
+
+    td,
+    tr,
+    th {
+      font-weight: 300;
+      padding: 1rem;
+    }
+    thead tr {
+      font-weight: bold;
+      background-color: #000000;
+    }
+    tr th {
+      font-weight: bold;
+      color: #ffffff;
+      box-shadow: 0px 2px 3px 0px #000000;
+    }
+    tbody tr {
+      border-bottom: 1px solid $light-gray;
+    }
+
+    tbody tr:nth-of-type(even) {
+      background-color: $lighter-green;
+    }
+
+    min-width: 30rem;
+
+    @media screen and (min-width: 700px) {
+      min-width: 40rem;
+    }
+
+    @media screen and (min-width: 950px) {
+      min-width: 55rem;
+    }
+
+    @media screen and (min-width: 1300px) {
+      min-width: 70rem;
+    }
+    @media screen and (min-width: 1500px) {
+      min-width: 80rem;
+    }
+    .edit-del-btns {
+      margin-top: 1rem;
+    }
+    .edit-icon {
+      color: $dark-green;
+    }
+    .del-icon {
+      color: $dark-red;
+    }
+    #add-btn {
+      color: $dark-green;
+      font-size: 1.5rem;
+    }
+  }
+}
+// style for modals
+
+.modal-overlay {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.edit-modal,
+.create-modal {
+  // positioning
+  background-color: #fff;
+  position: absolute;
+  padding: 2rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+
+  // form styling
+  .edit-form,
+  .create-form {
+    display: flex;
+    flex-direction: column;
+    label,
+    input,
+    select {
+      margin-top: 2rem;
+    }
+    select {
+      padding: 0.8rem;
+      max-width: 450px;
+      border-radius: 10px;
+      border: 1px solid $light-gray;
+    }
+
+    input {
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 1px solid $light-gray;
+      outline: none;
+      &:focus {
+        background-color: $lighter-gray;
+        transition: 0.2s;
+      }
+    }
+  }
+
+  .exit-btn {
+    margin-bottom: 2.5rem;
+    font-size: 1.5rem;
+    color: #000;
+  }
+
+  .modal-btn {
+    color: $dark-green;
+    font-weight: bold;
+    margin-top: 2rem;
+  }
+  @media screen and (min-width: 500px) {
+    top: initial;
+    left: initial;
+    right: initial;
+    bottom: initial;
+    border-radius: 15px;
+    padding: 2rem;
+    min-width: 450px;
+  }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.08s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
