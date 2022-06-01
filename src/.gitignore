@@ -2,3 +2,4 @@
 /env
 /journal/__pycache__/
 /finance/__pycache__/
+/journal/migrations/__pycache__
