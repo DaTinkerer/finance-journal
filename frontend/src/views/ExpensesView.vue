@@ -3,64 +3,65 @@
     <div class="navbar-container">
       <h2 class="title">budgetbook</h2>
       <div class="dropdown-div">
-        <div class="burger-menu">
+        <div @click="toggleDropdown()" class="burger-menu">
           <img src="../assets/burger.svg" alt="" />
         </div>
-        <div class="dropdown-content">
-          <p @click="goToChangePass">Change Password</p>
-          <p @click="logout">Log out</p>
-        </div>
+        <Transition name="fade">
+          <div v-if="showDropdown" class="dropdown-content">
+            <router-link to="/change-password" class="dropdown-items"
+              ><p>Change Password</p></router-link
+            >
+            <p class="dropdown-items" @click="logout">Log out</p>
+          </div>
+        </Transition>
       </div>
     </div>
 
     <div class="data-section">
-      <!-- table section  -->
-      <table class="table">
-        <thead>
-          <th
+      <!-- The table -->
+      <DataTable
+        :value="entries"
+        stripedRows
+        :paginator="true"
+        :rows="10"
+        responsiveLayout="scroll"
+        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+        :rowsPerPageOptions="[10, 20, 50]"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+      >
+        <template #header>
+          <div
             @click="
               $data.entry = { cost: '', category: 'Uncategorized' };
               showCreateModal = true;
             "
           >
             <font-awesome-icon id="add-btn" icon="plus" />
-          </th>
-          <tr>
-            <th scope="col" class="column-title">Date</th>
-            <th scope="col" class="column-title">Category</th>
-            <th scope="col" class="column-title">Amount</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr class="table-data" v-for="entry in entries" :key="entry.id">
-            <td>{{ entry.date }}</td>
-            <td>{{ entry.category }}</td>
-            <td>{{ entry.cost }}</td>
-            <div class="edit-del-btns">
-              <font-awesome-icon
-                @click="
-                  showEditModal = true;
-                  $data.entry = entry;
-                "
-                class="edit-icon"
-                icon="pencil"
-              />
-              &nbsp; &nbsp; &nbsp;
-              <font-awesome-icon
-                @click="
-                  $data.entry = entry;
-                  del();
-                "
-                class="del-icon"
-                icon="trash"
-              />
-            </div>
-          </tr>
-        </tbody>
-      </table>
-
+          </div>
+        </template>
+        <Column field="date" header="Date" :sortable="true"></Column>
+        <Column field="category" header="Category" :sortable="true"></Column>
+        <Column field="cost" header="Cost" :sortable="true"></Column>
+        <Column>
+          <template #body="slotProps">
+            <font-awesome-icon
+              @click="
+                showEditModal = true;
+                $data.entry = slotProps.data;
+              "
+              class="edit-icon"
+              icon="pencil" />
+            &nbsp; &nbsp; &nbsp;
+            <font-awesome-icon
+              @click="
+                $data.entry = slotProps.data;
+                del();
+              "
+              class="del-icon"
+              icon="trash"
+          /></template>
+        </Column>
+      </DataTable>
       <p class="default-msg" v-if="entries == ''">
         Great Job! You haven't spent any money.
       </p>
@@ -78,7 +79,7 @@
           >
             <font-awesome-icon icon="xmark" />
           </div>
-          <label for="category">Change Category:</label>
+          <label for="category">Change Category</label>
 
           <form
             @submit.prevent="
@@ -113,7 +114,7 @@
               <option value="Utilities">Utilities</option>
               <option value="Auto &#38; Transport">Auto &#38; Transport</option>
             </select>
-            <label for="cost">Change Amount:</label>
+            <label for="cost">Change Amount</label>
             <input
               name="cost"
               type="number"
@@ -123,23 +124,22 @@
             />
           </form>
 
-          <p
-            class="modal-btn"
+          <Button
+            label="Save"
+            class="p-button"
             id="update"
             @click="
               edit();
               showEditModal = false;
             "
-          >
-            Update
-          </p>
+          />
         </div>
         <!-- create modal -->
         <div class="create-modal" v-if="showCreateModal">
           <div class="exit-btn" @click="showCreateModal = false">
             <font-awesome-icon icon="xmark" />
           </div>
-          <label for="category">Add Category:</label>
+          <label for="category">Add Category</label>
 
           <form
             @submit.prevent="
@@ -174,7 +174,7 @@
               <option value="Auto &#38; Transport">Auto &#38; Transport</option>
               <option value="Uncategorized">Uncategorized</option>
             </select>
-            <label for="cost">Add Amount:</label>
+            <label id="label" for="cost">Add Amount</label>
             <input
               name="cost"
               type="number"
@@ -184,16 +184,15 @@
             />
           </form>
 
-          <p
-            class="modal-btn"
+          <Button
+            class="p-button"
+            label="Create"
             id="create"
             @click="
               createEntry();
               showCreateModal = false;
             "
-          >
-            Create
-          </p>
+          />
         </div>
       </div>
     </Transition>
@@ -207,9 +206,12 @@ export default {
   name: "ExpensesView",
   data() {
     return {
+      // expenses data
       entries: [],
       entry: {},
 
+      // conditional renders
+      showDropdown: false,
       showEditModal: false,
       showCreateModal: false,
     };
@@ -293,6 +295,13 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    toggleDropdown() {
+      if (this.showDropdown == false) {
+        this.showDropdown = true;
+      } else {
+        this.showDropdown = false;
+      }
     },
   },
 };

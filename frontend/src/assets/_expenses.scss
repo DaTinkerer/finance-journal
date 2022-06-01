@@ -2,7 +2,7 @@
   position: relative;
   margin: 0;
   padding: 0;
-  @media screen and (min-width: 500px) {
+  @media screen and (min-width: 550px) {
     position: initial;
   }
 }
@@ -26,17 +26,33 @@
   .title {
     margin-left: 1rem;
     @media screen and (min-width: 499px) {
-      margin-left: 3rem;
+      margin-left: 2rem;
     }
   }
   .burger-menu {
+    cursor: pointer;
     margin-right: 1rem;
     @media screen and (min-width: 499px) {
       margin-right: 3rem;
     }
   }
   .dropdown-content {
-    display: none;
+    background-color: #f8f9fa;
+    box-shadow: 2px 1px 3px 1px #cecece;
+    padding: 0.5rem;
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    z-index: 3;
+    .dropdown-items {
+      color: #aaaaaa;
+      cursor: pointer;
+      text-decoration: none;
+      &:hover {
+        color: rgb(103, 185, 103);
+        transition: 0.2s;
+      }
+    }
   }
 }
 
@@ -44,34 +60,11 @@
   display: grid;
   place-items: center;
   overflow: auto;
-  .table {
+  // table styling
+  .p-datatable {
     border-collapse: collapse;
     text-align: left;
     margin: 3rem 1rem;
-
-    td,
-    tr,
-    th {
-      font-weight: 300;
-      padding: 1rem;
-    }
-    thead tr {
-      font-weight: bold;
-      background-color: #000000;
-    }
-    tr th {
-      font-weight: bold;
-      color: #ffffff;
-      box-shadow: 0px 2px 3px 0px #000000;
-    }
-    tbody tr {
-      border-bottom: 1px solid $light-gray;
-    }
-
-    tbody tr:nth-of-type(even) {
-      background-color: $lighter-green;
-    }
-
     min-width: 30rem;
 
     @media screen and (min-width: 700px) {
@@ -92,14 +85,17 @@
       margin-top: 1rem;
     }
     .edit-icon {
-      color: $dark-green;
+      color: #4caf50;
+      cursor: pointer;
     }
     .del-icon {
-      color: $dark-red;
+      color: rgb(250, 127, 127);
+      cursor: pointer;
     }
     #add-btn {
-      color: $dark-green;
+      color: #4caf50;
       font-size: 1.5rem;
+      cursor: pointer;
     }
   }
 }
@@ -113,10 +109,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 3;
   background-color: rgba(0, 0, 0, 0.3);
 }
-
 .edit-modal,
 .create-modal {
   // positioning
@@ -129,6 +124,15 @@
   bottom: 0;
   z-index: 2;
 
+  @media screen and (min-width: 550px) {
+    top: 15rem;
+    left: initial;
+    right: initial;
+    bottom: initial;
+    border-radius: 15px;
+    padding: 2rem;
+    min-width: 450px;
+  }
   // form styling
   .edit-form,
   .create-form {
@@ -137,22 +141,29 @@
     label,
     input,
     select {
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
     select {
       padding: 0.8rem;
       max-width: 450px;
       border-radius: 10px;
-      border: 1px solid $light-gray;
+      border: 2px solid $light-green;
+      background-color: #fff;
+      &:focus {
+        background-color: $lighter-green;
+        transition: 0.2s;
+      }
     }
 
     input {
       padding: 0.8rem;
       border-radius: 10px;
-      border: 1px solid $light-gray;
+      border: 2px solid $light-green;
+      max-width: 450px;
+      box-sizing: border-box;
       outline: none;
       &:focus {
-        background-color: $lighter-gray;
+        background-color: $lighter-green;
         transition: 0.2s;
       }
     }
@@ -162,21 +173,11 @@
     margin-bottom: 2.5rem;
     font-size: 1.5rem;
     color: #000;
+    cursor: pointer;
   }
 
-  .modal-btn {
-    color: $dark-green;
-    font-weight: bold;
-    margin-top: 2rem;
-  }
-  @media screen and (min-width: 500px) {
-    top: initial;
-    left: initial;
-    right: initial;
-    bottom: initial;
-    border-radius: 15px;
-    padding: 2rem;
-    min-width: 450px;
+  .p-button {
+    margin-top: 1rem;
   }
 }
 .fade-enter-active,
