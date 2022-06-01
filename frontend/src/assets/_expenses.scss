@@ -1,0 +1,190 @@
+.expenses {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  @media screen and (min-width: 550px) {
+    position: initial;
+  }
+}
+.navbar-container {
+  .title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: $dark-green;
+
+    @media screen and (min-width: 500px) {
+      font-size: 2rem;
+    }
+  }
+  @media screen and (min-width: 500px) {
+    min-width: 20rem;
+  }
+  background-color: $light-green;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title {
+    margin-left: 1rem;
+    @media screen and (min-width: 499px) {
+      margin-left: 2rem;
+    }
+  }
+  .burger-menu {
+    cursor: pointer;
+    margin-right: 1rem;
+    @media screen and (min-width: 499px) {
+      margin-right: 3rem;
+    }
+  }
+  .dropdown-content {
+    background-color: #f8f9fa;
+    box-shadow: 2px 1px 3px 1px #cecece;
+    padding: 0.5rem;
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    z-index: 3;
+    .dropdown-items {
+      color: #aaaaaa;
+      cursor: pointer;
+      text-decoration: none;
+      &:hover {
+        color: rgb(103, 185, 103);
+        transition: 0.2s;
+      }
+    }
+  }
+}
+
+.data-section {
+  display: grid;
+  place-items: center;
+  overflow: auto;
+  // table styling
+  .p-datatable {
+    border-collapse: collapse;
+    text-align: left;
+    margin: 3rem 1rem;
+    min-width: 30rem;
+
+    @media screen and (min-width: 700px) {
+      min-width: 40rem;
+    }
+
+    @media screen and (min-width: 950px) {
+      min-width: 55rem;
+    }
+
+    @media screen and (min-width: 1300px) {
+      min-width: 70rem;
+    }
+    @media screen and (min-width: 1500px) {
+      min-width: 80rem;
+    }
+    .edit-del-btns {
+      margin-top: 1rem;
+    }
+    .edit-icon {
+      color: #4caf50;
+      cursor: pointer;
+    }
+    .del-icon {
+      color: rgb(250, 127, 127);
+      cursor: pointer;
+    }
+    #add-btn {
+      color: #4caf50;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  }
+}
+// style for modals
+
+.modal-overlay {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.edit-modal,
+.create-modal {
+  // positioning
+  background-color: #fff;
+  position: absolute;
+  padding: 2rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+
+  @media screen and (min-width: 550px) {
+    top: 15rem;
+    left: initial;
+    right: initial;
+    bottom: initial;
+    border-radius: 15px;
+    padding: 2rem;
+    min-width: 450px;
+  }
+  // form styling
+  .edit-form,
+  .create-form {
+    display: flex;
+    flex-direction: column;
+    label,
+    input,
+    select {
+      margin-top: 1rem;
+    }
+    select {
+      padding: 0.8rem;
+      max-width: 450px;
+      border-radius: 10px;
+      border: 2px solid $light-green;
+      background-color: #fff;
+      &:focus {
+        background-color: $lighter-green;
+        transition: 0.2s;
+      }
+    }
+
+    input {
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 2px solid $light-green;
+      max-width: 450px;
+      box-sizing: border-box;
+      outline: none;
+      &:focus {
+        background-color: $lighter-green;
+        transition: 0.2s;
+      }
+    }
+  }
+
+  .exit-btn {
+    margin-bottom: 2.5rem;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+  }
+
+  .p-button {
+    margin-top: 1rem;
+  }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.08s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
