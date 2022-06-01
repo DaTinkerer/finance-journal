@@ -73,8 +73,7 @@ export default {
         .then(() => {
           this.$router.push({ name: "Expenses" });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.wrong_cred = true;
         });
     },

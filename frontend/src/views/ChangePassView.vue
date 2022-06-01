@@ -78,7 +78,6 @@ export default {
         })
 
         .catch((err) => {
-          console.log(err.response.data);
           if (err.response.data.new_password2 != null) {
             this.passwd_msg = err.response.data.new_password2
               .toString()

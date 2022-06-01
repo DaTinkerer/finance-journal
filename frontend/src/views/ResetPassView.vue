@@ -82,7 +82,6 @@ export default {
           this.$router.push({ name: "Login" });
         })
         .catch((err) => {
-          console.log(err.response.data);
           if (err.response.data.new_password1 != null) {
             this.passwd_msg1 = err.response.data.new_password1
               .toString()

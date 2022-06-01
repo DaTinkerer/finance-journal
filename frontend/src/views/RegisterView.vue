@@ -113,10 +113,8 @@ export default {
           this.$router.push({ path: "Login" });
         })
         .catch((err) => {
-          console.log(err.response.data);
           this.err_msg = "";
           this.err_msg = err.response.data;
-          console.log(err.response.data.password1);
 
           // converts the err message arrays into strings and changes the commas, if any,
           // to spaces with regex

@@ -13,13 +13,9 @@ import "primevue/resources/themes/saga-green/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 // prime vue components
-import Card from "primevue/card";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
-import InputText from "primevue/inputtext";
-import InputNumber from "primevue/inputnumber";
 import Button from "primevue/button";
-import Dropdown from "primevue/dropdown";
 library.add(fas);
 createApp(App)
   .use(store)
@@ -28,10 +24,7 @@ createApp(App)
   .use("Card", Card)
   .component("DataTable", DataTable)
   .component("Column", Column)
-  .component("InputText", InputText)
-  .component("InputNumber", InputNumber)
   .component("Button", Button)
-  .component("Dropdown", Dropdown)
   .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");
 const axiosInstance = axios.create({
